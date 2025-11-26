@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://vn2e51ts7dde"]
+
+[node name="ui" type="CanvasLayer"]
+
+[node name="background2" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.91568, 0.000462224, 0.144397, 0.270588)
+
+[node name="background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.403922, 0, 0.0392157, 0.270588)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="players_margin" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="background" type="ColorRect" parent="players_margin"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.117647)
+
+[node name="players" type="VBoxContainer" parent="players_margin"]
+layout_mode = 2
+
+[node name="header" type="Control" parent="players_margin/players"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="background" type="ColorRect" parent="players_margin/players/header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.117647)
+
+[node name="Label" type="Label" parent="players_margin/players/header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Jugadores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="body" type="MarginContainer" parent="players_margin/players"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="player_list" type="VBoxContainer" parent="players_margin/players/body"]
+layout_mode = 2
+
+[node name="player1" type="Control" parent="players_margin/players/body/player_list"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.52549, 1, 0.996078, 0.776471)
+
+[node name="Label" type="Label" parent="players_margin/players/body/player_list/player1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bubba"
+vertical_alignment = 1
+
+[node name="player2" type="Control" parent="players_margin/players/body/player_list"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
+
+[node name="Label" type="Label" parent="players_margin/players/body/player_list/player2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Julo"
+vertical_alignment = 1
+
+[node name="player3" type="Control" parent="players_margin/players/body/player_list"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
+
+[node name="Label" type="Label" parent="players_margin/players/body/player_list/player3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Julo"
+vertical_alignment = 1
+
+[node name="player4" type="Control" parent="players_margin/players/body/player_list"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
+
+[node name="Label" type="Label" parent="players_margin/players/body/player_list/player4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Julo"
+vertical_alignment = 1
+
+[node name="player5" type="Control" parent="players_margin/players/body/player_list"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
+
+[node name="Label" type="Label" parent="players_margin/players/body/player_list/player5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Julo"
+vertical_alignment = 1
+
+[node name="state_label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 21.0
+offset_top = 16.0
+offset_right = 66.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 100
+text = "COSO"
