@@ -1,6 +1,15 @@
-[gd_scene format=3 uid="uid://vn2e51ts7dde"]
+[gd_scene load_steps=5 format=3 uid="uid://vn2e51ts7dde"]
+
+[ext_resource type="Texture2D" uid="uid://5mv586dvoua" path="res://icon.svg" id="1_nb4k0"]
+[ext_resource type="Script" uid="uid://4rdxfihjapta" path="res://ui/ui.gd" id="1_wl5ax"]
+[ext_resource type="Script" uid="uid://dqfanuamvjv6d" path="res://ui/multiple_panel.gd" id="2_ks8t7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ks8t7"]
+texture = ExtResource("1_nb4k0")
+modulate_color = Color(1, 0.121569, 1, 1)
 
 [node name="ui" type="CanvasLayer"]
+script = ExtResource("1_wl5ax")
 
 [node name="background2" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -21,18 +30,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.403922, 0, 0.0392157, 0.270588)
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_right = 100.0
-grow_horizontal = 2
-grow_vertical = 0
 
 [node name="players_margin" type="MarginContainer" parent="."]
 anchors_preset = 7
@@ -219,3 +216,57 @@ offset_right = 66.0
 offset_bottom = 39.0
 theme_override_font_sizes/font_size = 100
 text = "COSO"
+
+[node name="menu" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(800, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ks8t7")
+script = ExtResource("2_ks8t7")
+
+[node name="initial" type="VBoxContainer" parent="menu"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="create_server_button" type="Button" parent="menu/initial"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Create Server"
+icon = ExtResource("1_nb4k0")
+
+[node name="connect_button" type="Button" parent="menu/initial"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Connect as Client"
+icon = ExtResource("1_nb4k0")
+
+[node name="connecting" type="Control" parent="menu"]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="label" type="Label" parent="menu/connecting"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "connecting..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="menu/initial/create_server_button" to="." method="_on_create_server_button_pressed"]
+[connection signal="pressed" from="menu/initial/connect_button" to="." method="_on_connect_button_pressed"]

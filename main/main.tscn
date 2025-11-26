@@ -17,3 +17,7 @@ position = Vector2(960, 540)
 [node name="map" parent="offset/simulation" instance=ExtResource("3_3wy1v")]
 
 [node name="camera" type="Camera2D" parent="offset"]
+
+[connection signal="state_changed" from="." to="ui" method="_on_game_state_changed"]
+[connection signal="connect_as_client" from="ui" to="." method="_on_ui_connect_as_client"]
+[connection signal="create_server" from="ui" to="." method="_on_ui_create_server"]
