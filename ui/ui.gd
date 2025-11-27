@@ -17,3 +17,6 @@ func _on_create_server_button_pressed() -> void:
 
 func _on_connect_button_pressed() -> void:
 	emit_signal("connect_as_client")
+
+func _on_peer_spawner_spawned(_node: Node) -> void:
+	pass # print("Spawned a peer: %s / %s" % [multiplayer.get_unique_id(), node.peer_id])

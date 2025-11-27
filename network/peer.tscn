@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5qlwj1ldff22"]
+
+[ext_resource type="Script" uid="uid://dk7h5fbrexdnh" path="res://network/peer.gd" id="1_thvbb"]
+[ext_resource type="Script" uid="uid://c7fn1f1qh7ad6" path="res://network/player.gd" id="2_5nx4j"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5nx4j"]
+properties/0/path = NodePath(".:player_name")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:peer_id")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[node name="peer" type="Control"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_thvbb")
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="players" type="VBoxContainer" parent="h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spectator" type="Control" parent="h_box_container/players"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="label" type="Label" parent="h_box_container/players/spectator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "spectator"
+
+[node name="player" type="Control" parent="h_box_container/players"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+script = ExtResource("2_5nx4j")
+
+[node name="label" type="Label" parent="h_box_container/players/player"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Los Redondos"
+
+[node name="multiplayer_synchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5nx4j")

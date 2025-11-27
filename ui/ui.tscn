@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://vn2e51ts7dde"]
+[gd_scene load_steps=6 format=3 uid="uid://vn2e51ts7dde"]
 
 [ext_resource type="Texture2D" uid="uid://5mv586dvoua" path="res://icon.svg" id="1_nb4k0"]
 [ext_resource type="Script" uid="uid://4rdxfihjapta" path="res://ui/ui.gd" id="1_wl5ax"]
 [ext_resource type="Script" uid="uid://dqfanuamvjv6d" path="res://ui/multiple_panel.gd" id="2_ks8t7"]
+[ext_resource type="PackedScene" uid="uid://b5qlwj1ldff22" path="res://network/peer.tscn" id="2_vkava"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ks8t7"]
 texture = ExtResource("1_nb4k0")
@@ -81,132 +82,11 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="player_list" type="VBoxContainer" parent="players_margin/players/body"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="player1" type="Control" parent="players_margin/players/body/player_list"]
-custom_minimum_size = Vector2(0, 40)
+[node name="peer" parent="players_margin/players/body/player_list" instance=ExtResource("2_vkava")]
 layout_mode = 2
-
-[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.52549, 1, 0.996078, 0.776471)
-
-[node name="Label" type="Label" parent="players_margin/players/body/player_list/player1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Bubba"
-vertical_alignment = 1
-
-[node name="player2" type="Control" parent="players_margin/players/body/player_list"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
-
-[node name="Label" type="Label" parent="players_margin/players/body/player_list/player2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Julo"
-vertical_alignment = 1
-
-[node name="player3" type="Control" parent="players_margin/players/body/player_list"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
-
-[node name="Label" type="Label" parent="players_margin/players/body/player_list/player3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Julo"
-vertical_alignment = 1
-
-[node name="player4" type="Control" parent="players_margin/players/body/player_list"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
-
-[node name="Label" type="Label" parent="players_margin/players/body/player_list/player4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Julo"
-vertical_alignment = 1
-
-[node name="player5" type="Control" parent="players_margin/players/body/player_list"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="background" type="ColorRect" parent="players_margin/players/body/player_list/player5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(2.31028e-06, 0.904071, 0.903754, 0.776471)
-
-[node name="Label" type="Label" parent="players_margin/players/body/player_list/player5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_right = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Julo"
-vertical_alignment = 1
 
 [node name="state_label" type="Label" parent="."]
 unique_name_in_owner = true
@@ -268,5 +148,10 @@ text = "connecting..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="peer_spawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://b5qlwj1ldff22")
+spawn_path = NodePath("../players_margin/players/body/player_list")
+
 [connection signal="pressed" from="menu/initial/create_server_button" to="." method="_on_create_server_button_pressed"]
 [connection signal="pressed" from="menu/initial/connect_button" to="." method="_on_connect_button_pressed"]
+[connection signal="spawned" from="peer_spawner" to="." method="_on_peer_spawner_spawned"]

@@ -26,6 +26,9 @@ func _ready() -> void:
 	get_window().position = Vector2(420, 0)
 	state = State.INITIAL
 	_connect_network_callbacks()
+	
+	var player_name = Samples.new().sample_player_name()
+	$ui.get_node("%player_list/peer").player_name = player_name
 
 ###
 
@@ -47,6 +50,14 @@ func _input(event: InputEvent) -> void:
 
 func _on_peer_connected(id):
 	print("%s: peer_connected %s" % [multiplayer.get_unique_id(), id])
+	if state == State.CONNECTING and id == 1:
+		var new_player_name = $ui.get_node("%player_list").get_children()[0].player_name
+		
+		for c in $ui.get_node("%player_list").get_children():
+			c.free()
+		
+		# TODO: aqui se decide tener un propio player (deberia ser solo si no arranco el partido)
+		add_player.rpc_id(1, new_player_name)
 
 func _on_peer_disconnected(id):
 	print("%s: peer_disconnected %s" % [multiplayer.get_unique_id(), id])
@@ -70,6 +81,16 @@ func _try_to_create_server() -> int:
 	var error = new_peer.create_server(PORT, MAX_CONNECTIONS)
 	
 	print("create_server -> ", error_string(error))
+
+	var new_peer_node:Peer = preload("res://network/peer.tscn").instantiate()
+	new_peer_node.name = "player1"
+	new_peer_node.player_name = $ui.get_node("%player_list").get_children()[0].player_name
+	new_peer_node.peer_id = 1
+	
+	for c in $ui.get_node("%player_list").get_children():
+		c.free()
+	
+	$ui.get_node("%player_list").add_child(new_peer_node)
 	
 	if error:
 		return error
@@ -96,6 +117,18 @@ func _try_to_connect_as_client() -> int:
 	
 	return OK
 
+@rpc("any_peer", "call_remote", "reliable", 0)
+func add_player(player_name):
+	print("%s requests adding '%s'" % [multiplayer.get_remote_sender_id(), player_name])
+	
+	var new_peer_node:Peer = preload("res://network/peer.tscn").instantiate()
+	new_peer_node.name = "player%s" % [$ui.get_node("%player_list").get_child_count() + 1]
+	new_peer_node.player_name = player_name
+	new_peer_node.peer_id = multiplayer.get_remote_sender_id()
+	
+	$ui.get_node("%player_list").add_child(new_peer_node)
+	
+
 ### Private misc
 
 func _connect_network_callbacks() -> void:
@@ -108,8 +141,8 @@ func _connect_network_callbacks() -> void:
 ### UI callbacks
 
 func _on_ui_connect_as_client() -> void:
-	_try_to_connect_as_client()
+	call_deferred("_try_to_connect_as_client")
 
 
 func _on_ui_create_server() -> void:
-	_try_to_create_server()
+	call_deferred("_try_to_create_server")
