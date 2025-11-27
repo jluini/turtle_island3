@@ -19,5 +19,6 @@ position = Vector2(960, 540)
 [node name="camera" type="Camera2D" parent="offset"]
 
 [connection signal="state_changed" from="." to="ui" method="_on_game_state_changed"]
+[connection signal="add_player" from="ui" to="." method="_on_ui_add_player"]
 [connection signal="connect_as_client" from="ui" to="." method="_on_ui_connect_as_client"]
 [connection signal="create_server" from="ui" to="." method="_on_ui_create_server"]

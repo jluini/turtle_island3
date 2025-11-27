@@ -38,8 +38,6 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_right = 150.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -48,6 +46,7 @@ layout_mode = 2
 color = Color(0, 0, 0, 0.117647)
 
 [node name="players" type="VBoxContainer" parent="players_margin"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="header" type="Control" parent="players_margin/players"]
@@ -114,6 +113,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_ks8t7")
 script = ExtResource("2_ks8t7")
 
 [node name="initial" type="VBoxContainer" parent="menu"]
+visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
@@ -148,10 +148,23 @@ text = "connecting..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="lobby" type="Control" parent="menu"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="start_game_button" type="Button" parent="menu/lobby"]
+layout_mode = 0
+offset_left = 367.0
+offset_top = 385.0
+offset_right = 463.0
+offset_bottom = 416.0
+text = "Start Game"
+
 [node name="peer_spawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://b5qlwj1ldff22")
 spawn_path = NodePath("../players_margin/players/body/player_list")
 
+[connection signal="add_player" from="players_margin/players/body/player_list/peer" to="." method="_on_peer_add_player"]
 [connection signal="pressed" from="menu/initial/create_server_button" to="." method="_on_create_server_button_pressed"]
 [connection signal="pressed" from="menu/initial/connect_button" to="." method="_on_connect_button_pressed"]
 [connection signal="spawned" from="peer_spawner" to="." method="_on_peer_spawner_spawned"]

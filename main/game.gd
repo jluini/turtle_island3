@@ -14,6 +14,7 @@ enum State {
 	HOSTING,
 	
 	CONNECTING,
+	CONNECTED
 }
 
 var state : State = State.NOTHING:
@@ -27,8 +28,21 @@ func _ready() -> void:
 	state = State.INITIAL
 	_connect_network_callbacks()
 	
-	var player_name = Samples.new().sample_player_name()
-	$ui.get_node("%player_list/peer").player_name = player_name
+	_clear_peer_list()
+	_add_peer(1, Samples.new().sample_player_name())
+
+func _clear_peer_list():
+	for c in $ui.get_node("%player_list").get_children():
+		c.free()
+
+func _add_peer(peer_id, player_name):
+	# $ui.get_node("%player_list/peer").player_name = player_name
+	var new_peer_node:Peer = preload("res://network/peer.tscn").instantiate()
+	new_peer_node.peer_id = 1
+	new_peer_node.name = "peer_%s" % peer_id
+	new_peer_node.player_name = player_name
+	
+	$ui.get_node("%player_list").add_child(new_peer_node)
 
 ###
 
@@ -51,10 +65,12 @@ func _input(event: InputEvent) -> void:
 func _on_peer_connected(id):
 	print("%s: peer_connected %s" % [multiplayer.get_unique_id(), id])
 	if state == State.CONNECTING and id == 1:
-		var new_player_name = $ui.get_node("%player_list").get_children()[0].player_name
+		state = State.CONNECTED
 		
-		for c in $ui.get_node("%player_list").get_children():
-			c.free()
+		# var new_player_name = $ui.get_node("%player_list").get_children()[0].player_name
+		var new_player_name = 'Cliente'
+		
+		_clear_peer_list()
 		
 		# TODO: aqui se decide tener un propio player (deberia ser solo si no arranco el partido)
 		add_player.rpc_id(1, new_player_name)
@@ -82,15 +98,14 @@ func _try_to_create_server() -> int:
 	
 	print("create_server -> ", error_string(error))
 
-	var new_peer_node:Peer = preload("res://network/peer.tscn").instantiate()
-	new_peer_node.name = "player1"
-	new_peer_node.player_name = $ui.get_node("%player_list").get_children()[0].player_name
-	new_peer_node.peer_id = 1
-	
-	for c in $ui.get_node("%player_list").get_children():
-		c.free()
-	
-	$ui.get_node("%player_list").add_child(new_peer_node)
+	#var new_peer_node:Peer = preload("res://network/peer.tscn").instantiate()
+	#new_peer_node.name = "player1"
+	#new_peer_node.player_name = $ui.get_node("%player_list").get_children()[0].player_name
+	#new_peer_node.peer_id = 1
+	#
+	#_clear_peer_list()
+	#
+	#$ui.get_node("%player_list").add_child(new_peer_node)
 	
 	if error:
 		return error
@@ -114,6 +129,8 @@ func _try_to_connect_as_client() -> int:
 	
 	multiplayer.multiplayer_peer = new_peer
 	state = State.CONNECTING
+	
+	_clear_peer_list()
 	
 	return OK
 
@@ -143,6 +160,8 @@ func _connect_network_callbacks() -> void:
 func _on_ui_connect_as_client() -> void:
 	call_deferred("_try_to_connect_as_client")
 
-
 func _on_ui_create_server() -> void:
 	call_deferred("_try_to_create_server")
+
+func _on_ui_add_player(peer_id: int, player_name: String) -> void:
+	print("%s: Add player %s (%s)" % [multiplayer.get_unique_id(), player_name, peer_id])

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn6padmq7n4cd"]
+
+[ext_resource type="Script" uid="uid://c7fn1f1qh7ad6" path="res://network/player.gd" id="1_pau52"]
+
+[node name="player" type="Control"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pau52")
+
+[node name="label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.195
+grow_horizontal = 2
+grow_vertical = 2
+text = "Esteban"
+vertical_alignment = 1
+
+[node name="remove_player_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "X"
+
+[connection signal="pressed" from="remove_player_button" to="." method="_on_remove_player_button_pressed"]

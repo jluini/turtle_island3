@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://da8ey0gwxp1w7"]
 
+[ext_resource type="Texture2D" uid="uid://m3p4xtwt1ssx" path="res://images/screenshot2.png" id="1_a0dt8"]
 [ext_resource type="Texture2D" uid="uid://5mv586dvoua" path="res://icon.svg" id="1_c7s6e"]
-[ext_resource type="Texture2D" uid="uid://xbu1b5s2rgcu" path="res://images/island.png" id="2_wijl4"]
 
 [node name="map" type="Node2D"]
 
 [node name="sprite_2d_7" type="Sprite2D" parent="."]
-scale = Vector2(2.03815, 1.35631)
-texture = ExtResource("2_wijl4")
+scale = Vector2(1.185, 1.185)
+texture = ExtResource("1_a0dt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_c7s6e")
