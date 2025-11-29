@@ -4,7 +4,10 @@ class_name Peer
 signal add_player(peer_id:int, player_name:String)
 #signal remove_player(peer_id:int, player_name:String)
 
-@export var peer_id:int = 0
+@export var peer_id:int = 0:
+	set(new_peer_id):
+		peer_id = new_peer_id
+		name = "peer_%s" % peer_id
 
 @export var player_name:String:
 	set(new_player_name):

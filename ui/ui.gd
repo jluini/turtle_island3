@@ -1,9 +1,9 @@
 extends CanvasLayer
 
-signal create_server
-signal connect_as_client
+#signal create_server
+#signal connect_as_client
 
-signal add_player(peer_id:int, player_name:String)
+# signal add_player(peer_id:int, player_name:String)
 
 func _ready() -> void:
 	$menu.switch_to("initial")
@@ -20,15 +20,11 @@ func _on_game_state_changed(new_state):
 
 ###
 
-func _on_create_server_button_pressed() -> void:
-	emit_signal("create_server")
-
-func _on_connect_button_pressed() -> void:
-	emit_signal("connect_as_client")
+#func _on_create_server_button_pressed() -> void:
+	#emit_signal("create_server")
+#
+#func _on_connect_button_pressed() -> void:
+	#emit_signal("connect_as_client")
 
 func _on_peer_spawner_spawned(_node: Node) -> void:
-	pass # print("Spawned a peer: %s / %s" % [multiplayer.get_unique_id(), node.peer_id])
-
-func _on_peer_add_player(peer_id: int, player_name: String) -> void:
-	#print("should add player")
-	emit_signal("add_player", peer_id, player_name)
+	print("%s: Spawned a peer: %s / %s (%s)" % [multiplayer.get_unique_id(), _node.peer_id, _node.name, _node.player_name])

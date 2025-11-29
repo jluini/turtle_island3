@@ -1,33 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://da8ey0gwxp1w7"]
+[gd_scene load_steps=4 format=3 uid="uid://da8ey0gwxp1w7"]
 
 [ext_resource type="Texture2D" uid="uid://m3p4xtwt1ssx" path="res://images/screenshot2.png" id="1_a0dt8"]
 [ext_resource type="Texture2D" uid="uid://5mv586dvoua" path="res://icon.svg" id="1_c7s6e"]
+[ext_resource type="Texture2D" uid="uid://dny072qxfxca0" path="res://images/screenshot4.png" id="2_4hjbm"]
 
 [node name="map" type="Node2D"]
 
 [node name="sprite_2d_7" type="Sprite2D" parent="."]
+position = Vector2(282, 0)
 scale = Vector2(1.185, 1.185)
 texture = ExtResource("1_a0dt8")
 
+[node name="sprite_2d_8" type="Sprite2D" parent="."]
+position = Vector2(-287, 0)
+scale = Vector2(1.185, 1.185)
+texture = ExtResource("2_4hjbm")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_c7s6e")
 
 [node name="Sprite2D6" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, 136)
 texture = ExtResource("1_c7s6e")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(500, 0)
 texture = ExtResource("1_c7s6e")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-500, 0)
 texture = ExtResource("1_c7s6e")
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-1000, 0)
 texture = ExtResource("1_c7s6e")
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1000, 0)
 texture = ExtResource("1_c7s6e")

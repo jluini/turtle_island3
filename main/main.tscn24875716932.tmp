@@ -95,11 +95,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="peer_list" type="VBoxContainer" parent="ui/players_margin/players/body"]
+[node name="player_list" type="VBoxContainer" parent="ui/players_margin/players/body"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="peer" parent="ui/players_margin/players/body/peer_list" instance=ExtResource("3_4dugh")]
+[node name="peer" parent="ui/players_margin/players/body/player_list" instance=ExtResource("3_4dugh")]
 layout_mode = 2
 
 [node name="state_label" type="Label" parent="ui"]
@@ -175,6 +175,10 @@ offset_right = 463.0
 offset_bottom = 416.0
 text = "Start Game"
 
+[node name="peer_spawner" type="MultiplayerSpawner" parent="ui"]
+_spawnable_scenes = PackedStringArray("uid://b5qlwj1ldff22")
+spawn_path = NodePath("../players_margin/players/body/player_list")
+
 [node name="grid_container" type="GridContainer" parent="ui"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -189,6 +193,7 @@ position = Vector2(960, 540)
 [node name="camera" type="Camera2D" parent="offset"]
 
 [connection signal="state_changed" from="." to="ui" method="_on_game_state_changed"]
-[connection signal="add_player" from="ui/players_margin/players/body/peer_list/peer" to="." method="_on_peer_add_player"]
+[connection signal="add_player" from="ui/players_margin/players/body/player_list/peer" to="." method="_on_peer_add_player"]
 [connection signal="pressed" from="ui/menu/initial/create_server_button" to="." method="_on_create_server_button_pressed"]
 [connection signal="pressed" from="ui/menu/initial/connect_button" to="." method="_on_connect_button_pressed"]
+[connection signal="spawned" from="ui/peer_spawner" to="ui" method="_on_peer_spawner_spawned"]
